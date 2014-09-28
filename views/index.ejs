@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html ng-app="demoApp">
   <head>
-    <title><%= title %></title>
+    <title ng-bind-template="<%=title%> {{query}}"><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script type="text/javascript" src="/angular/angular.min.js"></script>
     <script type="text/javascript" src="/javascripts/controllers.js"></script>
   </head>
-  <body >
+  <body ng-controller="phoneListContoller">
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-    <ul ng-controller="phoneListContoller">
+    <p>{{query}}</p>
+    <input ng-model="query">
+    <ul >
     	<li>
     		<p>total number of phones: {{phones.length}}</p>
     	</li>
-    	
+
     	<li ng-repeat="phone in phones">
     		{{phone.name}}
       		<p>{{phone.snippet}}</p>
     	</li>
     </ul>
-    <ul ng-controller="iPhoneListController">
-    	<li ng-repeat="iphone in iphones">
+    <ul ng-controller="remotePhonesController">
+    	<li ng-repeat="iphone in iphones | filter : query">
     		<p>{{iphone}}</p>
     	</li>
     </ul>
